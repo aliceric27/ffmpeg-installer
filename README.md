@@ -1,143 +1,145 @@
-# FFmpeg 自動安裝器
+# FFmpeg Automatic Installer
+
+English | [中文](README.zh-TW.md)
 
 ![Language](https://img.shields.io/badge/Language-Batch-blue)
 ![License](https://img.shields.io/badge/License-GPL-brightgreen)
 
-這是一個 Windows 批次檔腳本，可以自動下載、安裝並配置 FFmpeg 到您的系統中。
+A Windows batch script that automatically downloads, installs, and configures FFmpeg on your system.
 
-## 功能特色
+## Features
 
-- 🚀 **自動下載**：從官方 GitHub 倉庫下載最新版本的 FFmpeg
-- 📦 **自動解壓縮**：無需手動解壓縮檔案
-- 🔧 **安全環境變數管理**：使用 PowerShell/.NET API 安全地修改 PATH，不會破壞現有環境變數
-- 🛡️ **冪等性保證**：重複執行不會重複添加路徑或造成問題
-- 🧹 **自動清理**：安裝完成後自動清理暫存檔案
-- ✅ **安裝驗證**：自動驗證安裝是否成功
-- 🔐 **權限檢測**：自動檢測管理員權限並選擇適當的安裝方式
-- 📋 **詳細日誌**：提供清晰的安裝進度和狀態訊息
+- 🚀 **Automatic Download**: Downloads the latest FFmpeg version from the official GitHub repository
+- 📦 **Automatic Extraction**: No manual file extraction required
+- 🔧 **Safe Environment Variable Management**: Uses PowerShell/.NET API to safely modify PATH without breaking existing environment variables
+- 🛡️ **Idempotent Design**: Safe to run multiple times without duplicate path additions or issues
+- 🧹 **Automatic Cleanup**: Automatically cleans up temporary files after installation
+- ✅ **Installation Verification**: Automatically verifies successful installation
+- 🔐 **Permission Detection**: Automatically detects administrator privileges and chooses appropriate installation method
+- 📋 **Detailed Logging**: Provides clear installation progress and status messages
 
-## 系統需求
+## System Requirements
 
-- Windows 10/11 或 Windows Server 2016+
-- PowerShell 5.0+ （Windows 10/11 內建）
-- 網路連線（用於下載 FFmpeg）
+- Windows 10/11 or Windows Server 2016+
+- PowerShell 5.0+ (built-in with Windows 10/11)
+- Internet connection (for downloading FFmpeg)
 
-## 使用方法
+## Usage
 
-### 方法一：直接執行（推薦）
+### Method 1: Direct Execution (Recommended)
 
-1. 下載 `install_ffmpeg.bat` 檔案
-2. 以滑鼠右鍵點擊該檔案
-3. 選擇「以系統管理員身分執行」（獲得最佳安裝體驗）
-4. 按照螢幕指示等待安裝完成
-5. 重新開啟命令提示字元或 PowerShell 視窗
+1. Download the `install_ffmpeg.bat` file
+2. Right-click on the file
+3. Select "Run as administrator" (for best installation experience)
+4. Follow the on-screen instructions and wait for installation to complete
+5. Reopen Command Prompt or PowerShell window
 
-### 方法二：命令列執行
+### Method 2: Command Line Execution
 
 ```cmd
-# 一般使用者權限（安裝到使用者環境變數）
+# Regular user permissions (installs to user environment variables)
 install_ffmpeg.bat
 
-# 管理員權限（安裝到系統環境變數，推薦）
-# 以管理員身份開啟命令提示字元後執行
+# Administrator permissions (installs to system environment variables, recommended)
+# Run from administrator Command Prompt
 install_ffmpeg.bat
 ```
 
-## 安裝位置
+## Installation Locations
 
-### 使用者權限安裝
-- **安裝路徑**：`%USERPROFILE%\ffmpeg`
-- **環境變數**：使用者 PATH
+### User Permission Installation
+- **Installation Path**: `%USERPROFILE%\ffmpeg`
+- **Environment Variable**: User PATH
 
-### 管理員權限安裝
-- **安裝路徑**：`C:\ffmpeg`
-- **環境變數**：系統 PATH
+### Administrator Permission Installation
+- **Installation Path**: `C:\ffmpeg`
+- **Environment Variable**: System PATH
 
-## 驗證安裝
+## Verify Installation
 
-安裝完成後，開啟新的命令提示字元或 PowerShell 視窗，輸入以下命令驗證：
+After installation completes, open a new Command Prompt or PowerShell window and run:
 
 ```cmd
 ffmpeg -version
 ```
 
-如果看到 FFmpeg 的版本資訊，表示安裝成功。
+If you see FFmpeg version information, the installation was successful.
 
-## 故障排除
+## Troubleshooting
 
-### 下載失敗
-- **原因**：網路連線問題或防火牆阻擋
-- **解決方案**：
-  - 檢查網路連線
-  - 暫時關閉防火牆或防毒軟體
-  - 使用 VPN 或代理伺服器
+### Download Failed
+- **Cause**: Network connection issues or firewall blocking
+- **Solutions**:
+  - Check network connection
+  - Temporarily disable firewall or antivirus software
+  - Use VPN or proxy server
 
-### 權限不足
-- **症狀**：無法建立目錄或設定環境變數
-- **解決方案**：以管理員身份執行腳本
+### Insufficient Permissions
+- **Symptoms**: Cannot create directories or set environment variables
+- **Solution**: Run the script as administrator
 
-### 環境變數未生效
-- **症狀**：安裝完成但 `ffmpeg` 命令無法識別
-- **解決方案**：
-  - 重新開啟命令提示字元視窗
-  - 登出並重新登入 Windows 帳戶
-  - 重新啟動電腦
+### Environment Variables Not Taking Effect
+- **Symptoms**: Installation complete but `ffmpeg` command not recognized
+- **Solutions**:
+  - Reopen Command Prompt window
+  - Log out and log back into Windows account
+  - Restart computer
 
-### 解壓縮失敗
-- **原因**：磁碟空間不足或檔案損壞
-- **解決方案**：
-  - 確保有足夠的磁碟空間（建議至少 500MB）
-  - 重新執行安裝腳本
+### Extraction Failed
+- **Cause**: Insufficient disk space or corrupted files
+- **Solutions**:
+  - Ensure sufficient disk space (recommend at least 500MB)
+  - Re-run the installation script
 
-## 手動移除
+## Manual Removal
 
-如需移除 FFmpeg，請執行以下步驟：
+To remove FFmpeg, follow these steps:
 
-1. 刪除安裝目錄：
+1. Delete installation directory:
    ```cmd
-   # 使用者安裝
+   # User installation
    rmdir /s "%USERPROFILE%\ffmpeg"
    
-   # 系統安裝
+   # System installation
    rmdir /s "C:\ffmpeg"
    ```
 
-2. 從環境變數移除路徑：
-   - 開啟「系統內容」→「進階」→「環境變數」
-   - 在 PATH 變數中移除 FFmpeg 相關路徑
+2. Remove path from environment variables:
+   - Open "System Properties" → "Advanced" → "Environment Variables"
+   - Remove FFmpeg-related paths from the PATH variable
 
-## 技術細節
+## Technical Details
 
-### 下載來源
-- **官方倉庫**：[BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds)
-- **版本**：master-latest-win64-gpl-shared
-- **授權**：GPL
+### Download Source
+- **Official Repository**: [BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds)
+- **Version**: master-latest-win64-gpl-shared
+- **License**: GPL
 
-### 腳本功能
-- 使用 PowerShell 進行 HTTP 下載
-- 自動檢測解壓縮後的目錄結構
-- **安全的環境變數管理**：
-  - 使用 `System.Environment.GetEnvironmentVariable()` 正確讀取現有 PATH
-  - 使用 `System.Environment.SetEnvironmentVariable()` 安全修改 PATH
-  - 避免覆蓋現有環境變數的問題
-  - 支援 User 和 Machine 兩種作用範圍
-- 完整的錯誤處理機制
-- 冪等性設計：重複執行安全無害
+### Script Features
+- Uses PowerShell for HTTP downloads
+- Automatically detects extracted directory structure
+- **Safe Environment Variable Management**:
+  - Uses `System.Environment.GetEnvironmentVariable()` to correctly read existing PATH
+  - Uses `System.Environment.SetEnvironmentVariable()` to safely modify PATH
+  - Avoids overwriting existing environment variables
+  - Supports both User and Machine scopes
+- Complete error handling mechanisms
+- Idempotent design: safe to run repeatedly
 
-### 安全性保證
-- ❌ **不使用危險的 `setx` 命令**：避免 PATH 覆蓋問題
-- ✅ **使用官方 .NET API**：通過 PowerShell 調用 Windows 官方環境變數 API
-- ✅ **智慧重複檢測**：自動檢測路徑是否已存在，避免重複添加
-- ✅ **作用範圍隔離**：明確區分用戶級和系統級環境變數
+### Security Guarantees
+- ❌ **Does not use dangerous `setx` command**: Avoids PATH overwrite issues
+- ✅ **Uses official .NET API**: Calls Windows official environment variable API through PowerShell
+- ✅ **Smart duplicate detection**: Automatically detects if path already exists to avoid duplicate additions
+- ✅ **Scope isolation**: Clearly distinguishes between user-level and system-level environment variables
 
-## 授權條款
+## License
 
-此安裝腳本為開源軟體，FFmpeg 本身遵循 GPL 授權條款。
+This installation script is open source software. FFmpeg itself follows GPL license terms.
 
-## 支援與回饋
+## Support & Feedback
 
-如有問題或建議，請提出 Issue 或聯繫開發者。
+For issues or suggestions, please submit an Issue or contact the developer.
 
 ---
 
-**注意**：首次安裝後請重新開啟命令列視窗，新的環境變數才會生效。
+**Note**: Please reopen command line windows after first installation for new environment variables to take effect.
